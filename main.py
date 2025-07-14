@@ -35,6 +35,7 @@ unaM=fg.figuraAvierta(((5,5),(5,20),(12.5,10),(20,20),(20,5)))
 cruz=fg.figuraAvierta(((5,12.5),(20,12.5),(12.5,12.5),(12.5,20),(12.5,5)))
 unaR=fg.figuraAvierta(((5,5),(5,20),(12.5,18),(5,12.5),(12.5,5)))
 unaE=fg.figuraAvierta(((12.5,20),(5,20),(5,12.5),(12.5,12.5),(5,12.5),(5,5),(12.5,5)))
+unaEx=fg.figuraAvierta(((5,20),(5,5),(12.5,5),(5,5),(5,12.5),(10,12.5),(5,12.5),(5,20),(12.5,20),(15,12.5),(20,20),(15,12.5),(20,5)))
 
 def main2(event):
     """
@@ -53,6 +54,7 @@ def main():
     gluOrtho2D(vg.ortogonal[0], vg.ortogonal[1], vg.ortogonal[2], vg.ortogonal[3])
 
     itf.boton(30,520, 50, 50, curvaVesier, md.modoBesier)
+    itf.boton(30,470, 50, 50, unaEx, md.dibujarCorazon)
     itf.boton(90,520, 50, 50, recta, md.modoRecta)
     itf.boton(150,520, 50, 50, circulo, md.modoCirculo)
     itf.boton(210,520, 50, 50, rectanguloBoton, md.modoRectangulo)

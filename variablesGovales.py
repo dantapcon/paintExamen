@@ -14,7 +14,7 @@ resocuionCurva = 100  # Resolución de la curvas
 
 colorInterface = (0.5, 0.5, 0.5)  # Color de la interfaz
 grosorInterface = 3  # Grosor de la interfaz
-alturaBarraHeramientas= 100
+alturaBarraHeramientas= 130
 
 colorPincel = (1, 1, 1)  # Color del pincel
 grosorPincel = 5  # Grosor del pincel

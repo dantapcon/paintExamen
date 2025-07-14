@@ -401,3 +401,51 @@ def modorEscalarFigura():
                 vg.figurasPendientes = fg.escalarFigura(figura,centro,escala)
 
     cambiarMain2(f)
+
+def dibujarCorazon():
+    """
+    Dibuja un corazón usando círculos intercalados, recorte horizontal y líneas diagonales.
+    """
+    # Obtener el centro de la pantalla
+    centro_x = vg.ortogonal[1] / 2
+    centro_y = vg.ortogonal[3] / 2 - vg.alturaBarraHeramientas / 2
+    
+    # Radio de los círculos
+    radio = 50
+    
+    # Crear dos círculos intercalados (tocándose en el centro)
+    # Círculo izquierdo
+    centro_izq = (centro_x - radio/2, centro_y)
+    punto_radio_izq = (centro_x - radio/2 + radio, centro_y)
+    circulo_izq = fg.Circulo((centro_izq, punto_radio_izq))
+    
+    # Círculo derecho
+    centro_der = (centro_x + radio/2, centro_y)
+    punto_radio_der = (centro_x + radio/2 + radio, centro_y)
+    circulo_der = fg.Circulo((centro_der, punto_radio_der))
+    
+    # Agregar los círculos
+    vg.vectoresCompletos.append((circulo_izq, vg.grosorPincel, vg.colorPincel))
+    vg.vectoresCompletos.append((circulo_der, vg.grosorPincel, vg.colorPincel))
+    
+    # Crear rectángulo para recorte horizontal (cortar la parte superior)
+    punto1_recorte = (centro_x - radio * 1.5, centro_y)
+    punto2_recorte = (centro_x + radio * 1.5, centro_y + radio * 1.5)
+    
+    # Aplicar recorte
+    fg.trimRectangulos((punto1_recorte, punto2_recorte))
+    
+    # Crear las líneas diagonales hacia el punto central inferior
+    punto_inferior = (centro_x, centro_y - radio * 1.2)
+    
+    # Línea desde esquina izquierda
+    esquina_izq = (centro_x - radio, centro_y)
+    linea_izq = fg.linea((esquina_izq, punto_inferior))
+    
+    # Línea desde esquina derecha  
+    esquina_der = (centro_x + radio, centro_y)
+    linea_der = fg.linea((esquina_der, punto_inferior))
+    
+    # Agregar las líneas
+    vg.vectoresCompletos.append((linea_izq, vg.grosorPincel, vg.colorPincel))
+    vg.vectoresCompletos.append((linea_der, vg.grosorPincel, vg.colorPincel))

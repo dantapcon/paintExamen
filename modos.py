@@ -404,48 +404,48 @@ def modorEscalarFigura():
 
 def dibujarCorazon():
     """
-    Dibuja un corazón usando círculos intercalados, recorte horizontal y líneas diagonales.
+    Dibuja un corazón limpio usando círculos, recortes y líneas.
+    Elimina los residuos internos con recortes precisos.
     """
     # Obtener el centro de la pantalla
     centro_x = vg.ortogonal[1] / 2
     centro_y = vg.ortogonal[3] / 2 - vg.alturaBarraHeramientas / 2
     
-    # Radio de los círculos
-    radio = 50
+    radio = 50  # Radio base del corazón
     
-    # Crear dos círculos intercalados (tocándose en el centro)
-    # Círculo izquierdo
+    # 1. Dibujar los dos círculos base
     centro_izq = (centro_x - radio/2, centro_y)
-    punto_radio_izq = (centro_x - radio/2 + radio, centro_y)
-    circulo_izq = fg.Circulo((centro_izq, punto_radio_izq))
-    
-    # Círculo derecho
     centro_der = (centro_x + radio/2, centro_y)
-    punto_radio_der = (centro_x + radio/2 + radio, centro_y)
-    circulo_der = fg.Circulo((centro_der, punto_radio_der))
     
-    # Agregar los círculos
+    circulo_izq = fg.Circulo((centro_izq, (centro_izq[0] + radio, centro_izq[1])))
+    circulo_der = fg.Circulo((centro_der, (centro_der[0] + radio, centro_der[1])))
+    
+    # Agregar temporalmente los círculos completos
     vg.vectoresCompletos.append((circulo_izq, vg.grosorPincel, vg.colorPincel))
     vg.vectoresCompletos.append((circulo_der, vg.grosorPincel, vg.colorPincel))
     
-    # Crear rectángulo para recorte horizontal (cortar la parte superior)
-    punto1_recorte = (centro_x - radio * 1.5, centro_y)
-    punto2_recorte = (centro_x + radio * 1.5, centro_y + radio * 1.5)
     
-    # Aplicar recorte
-    fg.trimRectangulos((punto1_recorte, punto2_recorte))
+    fg.trimRectangulos((
+        (centro_x - radio*2, centro_y),  # Esquina inferior izquierda
+        (centro_x + radio*2, centro_y + radio*2)  # Esquina superior derecha
+    ))
     
-    # Crear las líneas diagonales hacia el punto central inferior
+    
+    fg.trimRectangulosAfuera((
+        (centro_x - radio*0.6, centro_y - radio*0.7),  # Punto interno izquierdo
+        (centro_x + radio*0.6, centro_y + radio*0.7)  # Punto interno derecho
+    ))
+    
+    
     punto_inferior = (centro_x, centro_y - radio * 1.2)
+    punto_izq = (centro_x - radio*1.5, centro_y)
+    punto_der = (centro_x + radio*1.5, centro_y)
     
-    # Línea desde esquina izquierda
-    esquina_izq = (centro_x - radio, centro_y)
-    linea_izq = fg.linea((esquina_izq, punto_inferior))
     
-    # Línea desde esquina derecha  
-    esquina_der = (centro_x + radio, centro_y)
-    linea_der = fg.linea((esquina_der, punto_inferior))
+    linea_izq = fg.linea((punto_izq, punto_inferior))
+    linea_der = fg.linea((punto_der, punto_inferior))
     
-    # Agregar las líneas
     vg.vectoresCompletos.append((linea_izq, vg.grosorPincel, vg.colorPincel))
     vg.vectoresCompletos.append((linea_der, vg.grosorPincel, vg.colorPincel))
+    
+   
